@@ -84,13 +84,21 @@ def delete():
         return jsonify({'message' : 'Unable to delete the note'})
 
 
+# Update a note
+@app.route("/edit", methods=['PUT'])
+def edit():
+    try:
+        noteId = request.form.get('id')
+        noteUsername = request.form.get('username')
+        noteBody = request.form.get('note')
 
-
-
-
-
-
-
-
-
+        for i, o in enumerate(usersData):
+            if o.id == int(noteId):
+                o.username = noteUsername
+                o.note = noteBody
+                break
+        
+        return jsonify({'message' : 'The note was successfully modified'})
+    except:
+        return jsonify({'message' : 'Unable to modify the note'})
 
