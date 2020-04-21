@@ -88,9 +88,9 @@ def delete():
 @app.route("/edit", methods=['PUT'])
 def edit():
     try:
-        noteId = request.form.get('id')
-        noteUsername = request.form.get('username')
-        noteBody = request.form.get('note')
+        noteId = request.json.get('id')
+        noteUsername = request.json.get('username')
+        noteBody = request.json.get('note')
 
         for i, o in enumerate(usersData):
             if o.id == int(noteId):
