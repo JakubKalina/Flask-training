@@ -60,9 +60,9 @@ def getAll():
 @app.route("/addNew", methods=['POST'])
 def addNew():
     try:
-        newNoteId = request.form.get('id')
-        newNoteUsername = request.form.get('username')
-        newNoteBody = request.form.get('note')
+        newNoteId = request.json.get('id')
+        newNoteUsername = request.json.get('username')
+        newNoteBody = request.json.get('note')
         usersData.append(userNote.UserNote(int(newNoteId), newNoteUsername, newNoteBody))
         return jsonify({'message' : 'Note was successfully added'})
     except:
@@ -73,7 +73,7 @@ def addNew():
 @app.route("/delete", methods=['DELETE'])
 def delete():
     try:
-        noteId = request.form.get('id')
+        noteId = request.headers.get('id')
         for i, o in enumerate(usersData):
             if o.id == int(noteId):
                 del usersData[i]
